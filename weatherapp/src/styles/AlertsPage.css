@@ -1,0 +1,262 @@
+.alerts-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.page-header {
+  margin-bottom: 30px;
+}
+
+.back-link {
+  color: #FF8C6B;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: all 0.3s;
+  font-size: 1em;
+}
+
+.back-link:hover {
+  color: #FF7050;
+  transform: translateX(-5px);
+}
+
+.alerts-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.alerts-header h1 {
+  color: #333;
+  font-size: 2.8em;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.alerts-header p {
+  color: #666;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+.alerts-section {
+  margin-bottom: 50px;
+}
+
+.alerts-section h2 {
+  color: #333;
+  font-size: 1.8em;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.alerts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.alert-box {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid;
+  transition: all 0.3s ease;
+}
+
+.alert-box:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateX(5px);
+}
+
+.alert-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.alert-icon {
+  font-size: 2em;
+  min-width: 50px;
+  text-align: center;
+}
+
+.alert-title-section {
+  flex: 1;
+}
+
+.alert-title {
+  margin: 0;
+  color: #333;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.alert-region {
+  display: block;
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.severity-badge {
+  display: inline-block;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.alert-description {
+  color: #555;
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 15px 0;
+  padding-left: 65px;
+}
+
+.alert-footer {
+  padding-left: 65px;
+  margin-top: 12px;
+}
+
+.alert-timestamp {
+  color: #999;
+  font-size: 0.9em;
+}
+
+.no-alerts {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-radius: 12px;
+  color: #10b981;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.highlights-section {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.highlights-section h2 {
+  color: #333;
+  font-size: 1.8em;
+  margin: 0 0 30px 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.highlights-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.highlight-box {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.highlight-box:hover {
+  transform: translateY(-5px);
+  border-color: #667eea;
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.15);
+}
+
+.highlight-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+}
+
+.highlight-title {
+  color: #666;
+  font-size: 0.95em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.highlight-value {
+  color: #667eea;
+  font-size: 2.2em;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+.highlight-description {
+  color: #888;
+  font-size: 0.9em;
+  margin: 12px 0 0 0;
+}
+
+@media (max-width: 768px) {
+  .alerts-page {
+    padding: 25px 15px;
+  }
+
+  .alerts-header h1 {
+    font-size: 2em;
+  }
+
+  .alert-box {
+    padding: 20px;
+  }
+
+  .alert-description {
+    padding-left: 0;
+    margin-top: 15px;
+  }
+
+  .alert-footer {
+    padding-left: 0;
+  }
+
+  .highlights-section {
+    padding: 25px;
+  }
+
+  .highlights-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .highlight-box {
+    padding: 20px;
+  }
+
+  .highlight-icon {
+    font-size: 2.5em;
+  }
+
+  .highlight-value {
+    font-size: 1.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .highlights-container {
+    grid-template-columns: 1fr;
+  }
+
+  .alert-header {
+    flex-direction: column;
+  }
+
+  .severity-badge {
+    align-self: flex-start;
+  }
+}

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { useFavorites } from "../hooks/useFavorites";
 import '../styles/SearchCityPage.css';
 
 interface WeatherResponse {
@@ -30,6 +31,7 @@ export default function SearchCityPage() {
   const [error, setError] = useState<string | null>(null);
   const [recentSearches, setRecentSearches] = useState<Array<{city: string; state: string}>>([]);
   const [deleteConfirmation, setDeleteConfirmation] = useState<{city: string; state: string} | null>(null);
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
   // QUALITY ATTRIBUTE: ACCURACY
   // Weather data is fetched from external weather API and displayed exactly as received
@@ -177,12 +179,27 @@ export default function SearchCityPage() {
     }
   };
 
+  const handleToggleFavorite = () => {
+    if (weatherData) {
+      if (isFavorite(weatherData.name, state)) {
+        removeFavorite(weatherData.name, state);
+      } else {
+        addFavorite(weatherData.name, state);
+      }
+    }
+  };
+
   return (
     <div className="search-page-container">
       <div className="search-header">
-        <Link to="/welcome" className="back-link">← Back to Home</Link>
+        <Link to="/welcome" className="back-link">
+          ← Back to Home
+        </Link>
         <h1>Search Weather by City</h1>
-        <p>Find current weather conditions for any city or use your current location</p>
+        <p>
+          Find current weather conditions for any city or use your current
+          location
+        </p>
       </div>
 
       <div className="search-content">
@@ -214,19 +231,19 @@ export default function SearchCityPage() {
             </div>
 
             <button type="submit" className="search-button" disabled={loading}>
-              {loading ? 'Searching...' : 'Search Weather'}
+              {loading ? "Searching..." : "Search Weather"}
             </button>
           </form>
 
           <div className="divider">OR</div>
 
-          <button 
-            type="button" 
-            className="location-button" 
+          <button
+            type="button"
+            className="location-button"
             onClick={handleUseLocation}
             disabled={loading}
           >
-            {loading ? 'Getting Location...' : '📍 Use My Location'}
+            {loading ? "Getting Location..." : "📍 Use My Location"}
           </button>
 
           {error && (
@@ -236,23 +253,45 @@ export default function SearchCityPage() {
           )}
 
           <div className="reliability-note">
-            <strong>Note:</strong> If location services fail or timeout after 10 seconds, you can retry or enter a city manually. The app continues functioning with manual search as a fallback option.
+            <strong>Note:</strong> If location services fail or timeout after 10
+            seconds, you can retry or enter a city manually. The app continues
+            functioning with manual search as a fallback option.
           </div>
         </div>
       </div>
 
       {weatherData && (
         <div className="weather-result">
-          <h2>Weather for {weatherData.name}, {weatherData.sys.country}</h2>
-          
+          <h2>
+            Weather for {weatherData.name}, {weatherData.sys.country}
+          </h2>
+
+          <button
+            className={`favorite-btn ${isFavorite(weatherData.name, state) ? "is-favorite" : ""}`}
+            onClick={handleToggleFavorite}
+            title={
+              isFavorite(weatherData.name, state)
+                ? "Remove from favorites"
+                : "Add to favorites"
+            }
+          >
+            {isFavorite(weatherData.name, state)
+              ? "★ Remove from Favorites"
+              : "☆ Add to Favorites"}
+          </button>
+
           <div className="weather-result-grid">
             <div className="weather-left">
               <div className="result-main">
                 <div className="temp-display">
-                  <div className="temperature">{Math.round(weatherData.main.temp)}°F</div>
-                  <div className="weather-condition">{weatherData.weather[0].main}</div>
+                  <div className="temperature">
+                    {Math.round(weatherData.main.temp)}°F
+                  </div>
+                  <div className="weather-condition">
+                    {weatherData.weather[0].main}
+                  </div>
                 </div>
-                
+
                 {weatherData.weather[0].icon && (
                   <img
                     src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}
@@ -267,19 +306,27 @@ export default function SearchCityPage() {
               <div className="weather-details">
                 <div className="detail-item">
                   <span className="detail-label">Description:</span>
-                  <span className="detail-value">{weatherData.weather[0].description}</span>
+                  <span className="detail-value">
+                    {weatherData.weather[0].description}
+                  </span>
                 </div>
                 <div className="detail-item">
                   <span className="detail-label">Feels Like:</span>
-                  <span className="detail-value">{Math.round(weatherData.main.feels_like)}°F</span>
+                  <span className="detail-value">
+                    {Math.round(weatherData.main.feels_like)}°F
+                  </span>
                 </div>
                 <div className="detail-item">
                   <span className="detail-label">Humidity:</span>
-                  <span className="detail-value">{weatherData.main.humidity}%</span>
+                  <span className="detail-value">
+                    {weatherData.main.humidity}%
+                  </span>
                 </div>
                 <div className="detail-item">
                   <span className="detail-label">Wind Speed:</span>
-                  <span className="detail-value">{weatherData.wind.speed} mph</span>
+                  <span className="detail-value">
+                    {weatherData.wind.speed} mph
+                  </span>
                 </div>
               </div>
             </div>
@@ -289,7 +336,10 @@ export default function SearchCityPage() {
 
       {!weatherData && !error && !loading && (
         <div className="no-data">
-          <p>Enter a city name or use your location to see current weather conditions</p>
+          <p>
+            Enter a city name or use your location to see current weather
+            conditions
+          </p>
         </div>
       )}
 
@@ -304,7 +354,9 @@ export default function SearchCityPage() {
                   className="recent-search-item"
                   onClick={() => handleRecentSearch(search.city, search.state)}
                 >
-                  <span className="search-name">{search.city}, {search.state}</span>
+                  <span className="search-name">
+                    {search.city}, {search.state}
+                  </span>
                 </button>
                 <button
                   type="button"
@@ -324,16 +376,15 @@ export default function SearchCityPage() {
         <div className="modal-overlay">
           <div className="modal-content">
             <p>Are you want to remove this city from your recent search?</p>
-            <p className="city-name">{deleteConfirmation.city}, {deleteConfirmation.state}</p>
+            <p className="city-name">
+              {deleteConfirmation.city}, {deleteConfirmation.state}
+            </p>
             <div className="modal-buttons">
-              <button 
-                className="modal-btn modal-yes" 
-                onClick={confirmDelete}
-              >
+              <button className="modal-btn modal-yes" onClick={confirmDelete}>
                 Yes
               </button>
-              <button 
-                className="modal-btn modal-no" 
+              <button
+                className="modal-btn modal-no"
                 onClick={() => setDeleteConfirmation(null)}
               >
                 No

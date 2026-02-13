@@ -3,6 +3,8 @@ import './App.css';
 import WelcomePage from './pages/WelcomePage';
 import SearchCityPage from './pages/SearchCityPage';
 import WeeklyForecastPage from './pages/WeeklyForecastPage';
+import FavoritesPage from "./pages/FavoritesPage";
+import AlertsPage from "./pages/AlertsPage";
 
 export interface Weather {
   id: number;
@@ -71,14 +73,28 @@ function App() {
       <nav className="navbar">
         <h1>⛅ Weather App</h1>
         <div className="nav-links">
-          <Link to="/welcome" className="nav-link">Welcome</Link>
-          <Link to="/search-city" className="nav-link">Search Weather</Link>
-          <Link to="/weekly-forecast" className="nav-link">Forecast</Link>
+          <Link to="/welcome" className="nav-link">
+            Welcome
+          </Link>
+          <Link to="/search-city" className="nav-link">
+            Search Weather
+          </Link>
+          <Link to="/weekly-forecast" className="nav-link">
+            Forecast
+          </Link>
+          <Link to="/favorites" className="nav-link">
+            ⭐ Favorites
+          </Link>
+          <Link to="/alerts" className="nav-link">
+            🚨 Alerts
+          </Link>
         </div>
       </nav>
       <Routes>
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/search-city" element={<SearchCityPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/alerts" element={<AlertsPage />} />
         <Route path="/weekly-forecast" element={<WeeklyForecastPage />} />
         <Route path="/" element={<WelcomePage />} />
       </Routes>

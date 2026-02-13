@@ -279,6 +279,36 @@
 .weather-result h2 {
   margin-top: 0;
   color: #333;
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .favorite-btn {
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: all 0.3s;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .favorite-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .favorite-btn.is-favorite {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+  }
+  
+  .favorite-btn.is-favorite:hover {
+    background: linear-gradient(135deg, #ffb300 0%, #ff8a00 100%);
 }
 
 .weather-result-grid {
